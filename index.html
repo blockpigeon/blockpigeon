@@ -1,0 +1,158 @@
+<html lang="en" class="h-100"><head>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Nova+Square&amp;display=swap" rel="stylesheet">
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Inter-blockchain event transfer oracle">
+  <meta name="author" content="Blockpigeon">
+  <title>Blockpigeon</title>
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
+
+  <!-- Custom styles for this template -->
+  <link href="assets/css/site.css" rel="stylesheet">
+<style>
+td {
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+table tr {
+    border-top: 1px solid #0000003b;
+}
+
+
+li {
+    margin-bottom: 0.5em;
+}
+
+body
+{
+        background: linear-gradient(
+179deg
+, rgb(117 217 153) 0%, rgb(117 217 153) 60%, rgb(182 134 255) 100%);
+}
+</style>
+    
+    </head>
+
+<body class="d-flex h-100 text-center text-white" style="
+    font-family: monospace;
+">
+
+  <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    
+
+    <main class="px-3">
+      <h1 style="
+    font-size: 70px;
+    letter-spacing: 5px;
+    color: #b686ff;
+    line-height: 2;
+    text-shadow: 2px 4px 1px #4c4d4d;
+    font-family: 'Nova Square', cursive;
+">BlockPigeon</h1><p class="lead" style="
+    font-style: italic;
+">Inter-blockchain event transfer oracle</p><img src="assets/pigeon.gif" alt="" style="max-width: 75%;max-height:400px;" class="mb-1">
+      
+      
+
+<br>
+
+<h2>How it works</h2><ol style="
+    text-align: justify;
+"><li>Emit an event from your contract.<br><i style="
+    /* color: #aa71c3; */
+">Blockpigeon will only deliver a validly emitted event from one contract on a supported chain to another contract on a supported chain.</i></li>
+<li><div>Next look up the contract address of the pigeon on your chain in the table below.</div><center style="">
+    <table style="
+    color: #ffffff; border-bottom: 1px solid rgb(0 0 0 / 23%); margin-bottom: 0.2em;
+">
+        <thead style="
+    /* border: 1px solid white; */
+    font-weight: bold;
+"><tr><td>Destination</td>
+            <td>Chain ID</td>
+            <td>Postage</td>
+    <td>Contract</td>
+        </tr>
+    </thead>
+<tbody>
+<tr>
+    <td>Ethereum</td>
+    <td>1</td>
+    <td>~ $25</td>
+    <td>0x785d28042abe9b7968966a61db44fb81d31ba85a</td>
+    </tr><tr>
+    <td>BSC</td>
+    <td>56</td>
+    <td>~ $2.5</td>
+    <td>0xaf50d7460B29aef8757ad9f08AA709269e4bf9c3</td>
+    </tr>
+<tr>
+    <td>xDai</td>
+    <td>100</td>
+    <td>~ $2.5</td>
+    <td>0x0E1AEAfFE99Ecc2D177C59D1587a410709E760CF</td>
+    </tr>
+<tr>
+    <td>Fuse</td>
+    <td>122</td>
+    <td>~ $2.5</td>
+    <td>0x0576B45F588424AA14F1B18A4D9fD3C260AD6A2a</td>
+    </tr><tr>
+    <td>Polygon</td>
+    <td>137</td>
+    <td>~ $2.5</td>
+    <td>0xCd875A2dcb17368D7233BD8159A0a7C68fBba621</td>
+    </tr>
+
+
+</tbody></table>
+</center></li>
+<li><p>Using the pigeon on your (source) chain query the cost to deliver the event to the destination chain. This will return the cost in the smallest unit of the native currency on your source chain (e.g. wei).</p><pre class="bg-dark text-start"><code>function pigeonCost(uint256 _dest_chain_id)
+    returns (uint256 pigeon_call_cost)</code></pre></li>
+<li><p>Send the required payment to the pigeon along with the event ID, destination chain ID, and destination contract ID and the source txn hash (or 0 if you are calling the pigeon from the transaction where the event is being generated).</p><pre class="bg-dark text-start"><code>function pigeonSend (
+        uint256 _source_txn_hash,
+        uint256 _source_event_id,
+        uint256 _dest_chain_id,
+        uint256 _dest_contract_id
+) returns (bool success)</code></pre></li>
+    <li><p>The blockpigeon oracle <b></b>will deliver the specified event to the following function on the specified destination contract</p><p>Pigeon Oracle (sender):</p><center style="font-weight: bold;">0x94175c8880a131605a72e61a27ff1568876fabe2</center><p></p><pre class="bg-dark text-start"><code>function pigeonArrive (
+        uint256  _source_chain_id,
+        uint256 _source_contract_id,
+        uint256  _source_block_no,
+        uint256  _source_confirmations,
+        uint256 _source_txn_hash,
+        uint256 _topic0,
+        uint256 _topic1,
+        uint256 _topic2,
+        uint256 _topic3,
+        uint256 _topic4,
+        uint256 _topic5
+) returns (bool success)</code></pre></li>
+</ol><p>Over time additional chains will be added. Anyone may use the BlockPigeon provided they pay the carrier fee. The Pigeon Oracle is redundantly provided from several locations around the world.</p>
+
+
+
+      
+
+
+
+
+
+
+      
+      
+    </main>
+
+    
+  </div>
+
+
+
+
+
+</body></html>
